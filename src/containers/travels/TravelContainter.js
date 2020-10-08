@@ -3,6 +3,7 @@ import axios from 'axios';
 import MaterialTable from 'material-table'
 import {Grid, Paper, Button} from '@material-ui/core';
 import { withRouter } from "react-router";
+import config from '../../global.config';
 
 class TravelContainer extends Component {
 
@@ -19,7 +20,7 @@ class TravelContainer extends Component {
 
     getTravels = async () => {
 
-        let {data:{travels},status} = await axios.get("http://localhost:3010/v1/travels");
+        let {data:{travels},status} = await axios.get(`${config.baseUrlAPI}/travels`);
         if(status === 200) this.setState({travels});  
     }
 
@@ -28,7 +29,7 @@ class TravelContainer extends Component {
         return(
             <Grid container spacing={3} justify="center">
                 <Grid item md={11} >
-                    <Button style={{marginLeft: "auto"}} variant="contained" color="primary" onClick={() => this.props.history.push("/crear")}>Crear Viaje</Button>
+                    <Button style={{marginLeft: "auto", marginBottom:"10px"}} variant="contained" color="primary" onClick={() => this.props.history.push("/crear")}>Crear Viaje</Button>
                     <Paper elevation={1}>
                           
                         <MaterialTable

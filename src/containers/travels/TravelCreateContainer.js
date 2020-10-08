@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import { withRouter } from "react-router";
 import {Grid, Card, CardHeader, CardContent, IconButton} from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
+import config from '../../global.config';
 
 class TravelCreateContainer extends Component {
 
@@ -21,7 +22,7 @@ class TravelCreateContainer extends Component {
 
     getTransports = async () => {
 
-        let {data:{transports},status} = await axios.get("http://localhost:3010/v1/transport");
+        let {data:{transports},status} = await axios.get(`${config.baseUrlAPI}/transport`);
         if(status === 200) this.setState({transports});  
     }
 
@@ -35,7 +36,7 @@ class TravelCreateContainer extends Component {
             roundtrip,
         } = form;
 
-        let{data:{travel, message}, status} = await axios.post("http://localhost:3010/v1/travels", {
+        let{data:{travel, message}, status} = await axios.post(`${config.baseUrlAPI}/travels`, {
             "startAddress": startAddress,
             "endAddress": endAddress,
             "kmTraveled": +kmTraveled,
